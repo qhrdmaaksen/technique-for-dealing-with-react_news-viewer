@@ -1,0 +1,9 @@
+뉴스 뷰어 프로젝트 정보
+NewsItem component : 각 뉴스 정보를 보여주는 컴포넌트
+NewsList component : API 를 요청하고 뉴스 데이터가 들어있는 배열로 변환해 렌더링해주는 컴포넌트
+
+뉴스 API 필드 정보
+title: 뉴스 제목
+description: 뉴스 내용
+url: 뉴스 링크
+urlToImage: 뉴스 이미지
