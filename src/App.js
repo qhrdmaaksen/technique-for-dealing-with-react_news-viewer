@@ -1,11 +1,24 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useState } from "react";
+import {useCallback, useState} from "react";
 import axios from "axios";
 import NewsList from "./components/NewsList";
+import Categories from "./components/Categories";
 
 function App() {
-  return <NewsList />;
+  // category 상태를 관리하는 useState
+  const [category, setCategory] = useState("all");
+  /** category 값을 업데이트하는 onSelect 함수*/
+  const onSelect = useCallback((category) => {
+    return setCategory(category)
+  }, [])
+
+  return (
+    <>
+      <Categories category={category} onSelect={onSelect} />
+      <NewsList category={category}/>
+    </>
+  );
 }
 /*const [data, setData] = useState(null);*/
 
