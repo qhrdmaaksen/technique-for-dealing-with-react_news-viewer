@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import {NavLink} from "react-router-dom";
 
 /** 카테고리별 객체*/
 const categories = [
@@ -44,8 +45,10 @@ const CategoriesBlock = styled.div`
   }
 `;
 
-/** 카테고리 제목 디자인*/
-const Category = styled.div`
+/** 카테고리 제목 디자인
+ * 카테고리에서 NavLink 사용
+ * 카테고리스에서 기존의 onSelect 함수를 사용하여 카테고리를 선택했을때 선택된 카테고리에 다른 스타일을 주는 기능을 NavLink 로 설정*/
+const Category = styled(NavLink)`
   font-size: 1.125rem;
   cursor: pointer;
   white-space: pre;
@@ -58,7 +61,17 @@ const Category = styled.div`
     color: #495057;
   }
 
-  /** 카테고리 클릭 시 디자인 및 클릭 후 마우스 오버 시 컬러색 설정*/
+  &.active {
+    font-weight: 600;
+    border-bottom: 2px solid #22b8cf;
+    color: #3bc9db;
+    &:hover {
+      color: #3bc9db;
+    }
+  }
+  
+  /*
+  /!** 카테고리 클릭 시 디자인 및 클릭 후 마우스 오버 시 컬러색 설정*!/
   ${(props) =>
     props.active &&
     css`
@@ -69,7 +82,7 @@ const Category = styled.div`
         color: #3bc9db;
       }
     `}
-
+  */
   & + & {
     margin-left: 1rem;
   }
@@ -82,10 +95,14 @@ const Categories = ({ category, onSelect }) => {
 			실제 카테고리 값을 연결 시켜줬으며 name 은 실제 카테고리 값을 가리키고 text 값은 렌더링할때 사용할 한글 카테고리를 가리킴*/}
       {categories.map((c) => {
         return (
+            /*NavLink 로 만들어진 Category 컴포넌트에 to 값은 /카테고리이름 으로 설정해줬음
+            * 카테고리 중에서 전체보기의 경우는 예외적으로 /all 대신 / 로 설정해줌*/
           <Category
             key={c.name}
-            active={category === c.name}
-            onClick={() => onSelect(c.name)}
+            className={({isActive}) => (isActive ? 'active' : undefined)}
+            to={c.name === 'all' ? '/' : `/${c.name}`}
+            /*active={category === c.name}*/
+            /*onClick={() => onSelect(c.name)}*/
           >
             {c.text}
           </Category>
