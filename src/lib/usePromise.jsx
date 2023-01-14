@@ -10,7 +10,7 @@ export default function usePromise (promiseCreator, deps) {
 	const [resolved, setResolved] = useState(null)
 	const [error, setError] = useState(null)
 
-	useEffect = (() => {
+	useEffect(() => {
 		const process = async () => {
 			setLoading(true)
 			try {
